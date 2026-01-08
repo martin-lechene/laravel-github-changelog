@@ -131,20 +131,18 @@
                 <!-- Main Content -->
                 <div class="lg:col-span-8 space-y-12">
                     <!-- Filters -->
-                    <div class="flex flex-wrap gap-2 mb-8 bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
-                        <button onclick="filterType('all')" class="filter-btn active px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 bg-primary-600 text-white shadow-md shadow-primary-500/20">
+                    <div
+                        class="flex flex-wrap gap-2 mb-8 bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
+                        <button onclick="filterType('all')"
+                            class="filter-btn active px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 bg-primary-600 text-white shadow-md shadow-primary-500/20">
                             All
                         </button>
                         @php
-                            $allTypes = [];
-                            foreach($changelog as $group) {
-                                foreach(array_keys($group) as $type) {
-                                    $allTypes[$type] = true;
-                                }
-                            }
+                            $allTypes = $changelog->flatMap(fn($group) => $group->keys())->unique()->sort();
                         @endphp
-                        @foreach(array_keys($allTypes) as $type)
-                            <button onclick="filterType('{{ Str::slug($type) }}')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">
+                        @foreach($allTypes as $type)
+                            <button onclick="filterType('{{ Str::slug($type) }}')"
+                                class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">
                                 {{ $type }}
                             </button>
                         @endforeach
@@ -160,11 +158,13 @@
 
                                 <h2
                                     class="text-2xl font-extrabold text-gray-900 dark:text-white mb-8 bg-white dark:bg-gray-950 inline-block pr-4 pr-4 py-1">
-                                    {{ $date }}</h2>
+                                    {{ $date }}
+                                </h2>
 
                                 <div class="space-y-8">
                                     @foreach($group as $groupName => $commits)
-                                        <div class="commit-group bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-shadow duration-300" data-type="{{ Str::slug($groupName) }}">
+                                        <div class="commit-group bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-shadow duration-300"
+                                            data-type="{{ Str::slug($groupName) }}">
                                             <div class="flex items-center mb-4">
                                                 <span
                                                     class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300">
@@ -323,11 +323,11 @@
                 btn.classList.add('bg-gray-100', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-400');
             });
 
-            const activeBtn = Array.from(buttons).find(btn => 
-                (type === 'all' && btn.innerText.trim().toLowerCase() === 'all') || 
+            const activeBtn = Array.from(buttons).find(btn =>
+                (type === 'all' && btn.innerText.trim().toLowerCase() === 'all') ||
                 (btn.getAttribute('onclick').includes(`'${type}'`))
             );
-            
+
             if (activeBtn) {
                 activeBtn.classList.remove('bg-gray-100', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-400');
                 activeBtn.classList.add('bg-primary-600', 'text-white', 'shadow-md', 'shadow-primary-500/20', 'active');
@@ -337,7 +337,7 @@
             dateGroups.forEach(dateGroup => {
                 let hasVisibleCommits = false;
                 const groupsInDate = dateGroup.querySelectorAll('.commit-group');
-                
+
                 groupsInDate.forEach(group => {
                     if (type === 'all' || group.getAttribute('data-type') === type) {
                         group.style.display = 'block';
