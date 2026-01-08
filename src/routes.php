@@ -2,4 +2,6 @@
 
 use Orlyapps\LaravelGithubChangelog\Http\Controllers\ChangelogController;
 
-Route::get('/changelog', ChangelogController::class)->name('changelog');
+Route::group(['middleware' => config('github-changelog.middleware', ['web'])], function () {
+    Route::get(config('github-changelog.route_path', 'changelog'), ChangelogController::class)->name('changelog');
+});

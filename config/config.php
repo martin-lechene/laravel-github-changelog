@@ -14,5 +14,7 @@ return [
         'chore' => 'Chore 🛠',
         'security' => 'Security 🔒',
         'performance' => 'Performance 📈'
-    ]
+    ],
+    'route_path' => 'changelog',
+    'middleware' => ['web'],
 ];
