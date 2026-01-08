@@ -18,6 +18,7 @@ Votre package Laravel GitHub Changelog a été mis à jour vers PHP 8.4 et les d
 - ✅ Laravel 9.x
 - ✅ Laravel 10.x
 - ✅ Laravel 11.x
+- ✅ Laravel 12.x
 - ❌ Laravel 7.x, 8.x (plus supportés)
 
 **Dépendances mises à jour:**
@@ -85,7 +86,7 @@ git push origin upgrade-to-php-8.4
 
 ### 4. Taguer la nouvelle version
 ```bash
-git tag -a v3.0.0 -m "Release version 3.0.0 - PHP 8.4 & Laravel 11 support"
+git tag -a v3.0.0 -m "Release version 3.0.0 - PHP 8.4 & Laravel 11/12 support"
 git push origin v3.0.0
 ```
 
@@ -108,7 +109,7 @@ Les utilisateurs devront:
 ### Code Source
 ✅ Aucune modification du code source n'était nécessaire
 ✅ Le code est déjà 100% compatible avec PHP 8.4
-✅ Compatibilité totale avec Laravel 9-11
+✅ Compatibilité totale avec Laravel 9-12
 
 ## 🔍 Vérification de compatibilité
 
@@ -131,7 +132,7 @@ Les utilisateurs devront:
 
 Le workflow GitHub Actions testera automatiquement:
 - PHP 8.2, 8.3, 8.4
-- Laravel 9, 10, 11
+- Laravel 9, 10, 11, 12
 - Dependencies: lowest & stable
 
 ## 🐛 En cas de problème

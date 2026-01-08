@@ -10,6 +10,7 @@ All notable changes to `laravel-github-changelog` will be documented in this fil
 
 ### Added
 - Added support for Laravel 11
+- Added support for Laravel 12
 - Added support for PHP 8.3 and 8.4
 - Added GitHub Actions CI workflow for modern automated testing
 

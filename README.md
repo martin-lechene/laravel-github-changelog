@@ -19,7 +19,7 @@ A Laravel package that automatically generates beautiful, formatted changelogs b
 ## 📋 Requirements
 
 - PHP ^8.2, ^8.3, or ^8.4
-- Laravel ^9.0 || ^10.0 || ^11.0
+- Laravel ^9.0 || ^10.0 || ^11.0 || ^12.0
 - A GitHub repository with commits following conventional commit syntax
 - GitHub Personal Access Token
 
