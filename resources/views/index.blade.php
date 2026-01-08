@@ -25,38 +25,40 @@
                     },
                     colors: {
                         primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
+                            50: 'var(--primary-50)',
+                            100: 'var(--primary-100)',
+                            200: 'var(--primary-200)',
+                            300: 'var(--primary-300)',
+                            400: 'var(--primary-400)',
+                            500: 'var(--primary-500)',
+                            600: 'var(--primary-600)',
+                            700: 'var(--primary-700)',
+                            800: 'var(--primary-800)',
+                            900: 'var(--primary-900)',
                         }
                     }
                 }
             }
         }
     </script>
-
+    
     <style>
-        [x-cloak] {
-            display: none !important;
+        :root {
+            /* Default Blue Theme */
+            --primary-50: #f0f9ff; --primary-100: #e0f2fe; --primary-200: #bae6fd;
+            --primary-300: #7dd3fc; --primary-400: #38bdf8; --primary-500: #0ea5e9;
+            --primary-600: #0284c7; --primary-700: #0369a1; --primary-800: #075985;
+            --primary-900: #0c4a6e;
         }
-
+        [x-cloak] { display: none !important; }
         .glass {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
-
         .dark .glass {
             background: rgba(17, 24, 39, 0.7);
         }
-
         .timeline-line::before {
             content: '';
             position: absolute;
@@ -64,26 +66,20 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(to bottom, #0284c7 0%, transparent 100%);
+            background: linear-gradient(to bottom, var(--primary-600) 0%, transparent 100%);
         }
-
         .dark .timeline-line::before {
-            background: linear-gradient(to bottom, #38bdf8 0%, transparent 100%);
+            background: linear-gradient(to bottom, var(--primary-400) 0%, transparent 100%);
         }
     </style>
 </head>
 
-<body
-    class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
     <div class="relative min-h-screen">
         <!-- Background Decor -->
         <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-            <div
-                class="absolute -top-[10%] -right-[10%] w-[40%] h-[40%] rounded-full bg-primary-100/50 dark:bg-primary-900/20 blur-[120px]">
-            </div>
-            <div
-                class="absolute -bottom-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-blue-100/50 dark:bg-blue-900/10 blur-[120px]">
-            </div>
+            <div class="absolute -top-[10%] -right-[10%] w-[40%] h-[40%] rounded-full bg-primary-100/50 dark:bg-primary-900/20 blur-[120px]"></div>
+            <div class="absolute -bottom-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-primary-100/30 dark:bg-primary-900/10 blur-[120px]"></div>
         </div>
 
         <!-- Navigation / Header -->
@@ -91,33 +87,33 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16 items-center">
                     <div class="flex items-center space-x-3">
-                        <div
-                            class="w-10 h-10 bg-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20">
+                        <div class="w-10 h-10 bg-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20 transition-colors duration-300">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
                         <div>
-                            <span
-                                class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ config('app.name') }}</span>
-                            <span
-                                class="ml-1 text-sm font-medium text-primary-600 dark:text-primary-400">Changelog</span>
+                            <span class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ config('app.name') }}</span>
+                            <span class="ml-1 text-sm font-medium text-primary-600 dark:text-primary-400 transition-colors duration-300">Changelog</span>
                         </div>
                     </div>
+                    
+                    <div class="flex items-center space-x-6">
+                        <!-- Theme Colors Selector -->
+                        <div class="hidden sm:flex items-center space-x-2 bg-gray-100/50 dark:bg-gray-800/50 p-1.5 rounded-full border border-gray-200/50 dark:border-gray-700/50">
+                            <button onclick="setThemeColor('blue')" class="w-5 h-5 rounded-full bg-blue-500 border-2 border-white dark:border-gray-900 hover:scale-110 transition-transform shadow-sm" title="Blue"></button>
+                            <button onclick="setThemeColor('emerald')" class="w-5 h-5 rounded-full bg-emerald-500 border-2 border-white dark:border-gray-900 hover:scale-110 transition-transform shadow-sm" title="Emerald"></button>
+                            <button onclick="setThemeColor('indigo')" class="w-5 h-5 rounded-full bg-indigo-500 border-2 border-white dark:border-gray-900 hover:scale-110 transition-transform shadow-sm" title="Indigo"></button>
+                            <button onclick="setThemeColor('rose')" class="w-5 h-5 rounded-full bg-rose-500 border-2 border-white dark:border-gray-900 hover:scale-110 transition-transform shadow-sm" title="Rose"></button>
+                            <button onclick="setThemeColor('amber')" class="w-5 h-5 rounded-full bg-amber-500 border-2 border-white dark:border-gray-900 hover:scale-110 transition-transform shadow-sm" title="Amber"></button>
+                        </div>
 
-                    <div class="flex items-center space-x-4">
-                        <button onclick="toggleDarkMode()"
-                            class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200 shadow-sm">
-                            <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707.707M7.757 7.757l.707.707M12 7a5 5 0 100 10 5 5 0 000-10z" />
+                        <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-200 shadow-sm">
+                            <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707.707M7.757 7.757l.707.707M12 7a5 5 0 100 10 5 5 0 000-10z" />
                             </svg>
-                            <svg id="moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            <svg id="moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                             </svg>
                         </button>
                     </div>
@@ -310,6 +306,45 @@
         } else {
             document.documentElement.classList.remove('dark');
             updateIcons(false);
+        }
+
+        const themes = {
+            blue: {
+                50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc', 400: '#38bdf8',
+                500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 800: '#075985', 900: '#0c4a6e'
+            },
+            emerald: {
+                50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7', 400: '#34d399',
+                500: '#10b981', 600: '#059669', 700: '#047857', 800: '#065f46', 900: '#064e3b'
+            },
+            indigo: {
+                50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8',
+                500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81'
+            },
+            rose: {
+                50: '#fff1f2', 100: '#ffe4e6', 200: '#fecdd3', 300: '#fda4af', 400: '#fb7185',
+                500: '#f43f5e', 600: '#e11d48', 700: '#be123c', 800: '#9f1239', 900: '#881337'
+            },
+            amber: {
+                50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24',
+                500: '#f59e0b', 600: '#d97706', 700: '#b45309', 800: '#92400e', 900: '#78350f'
+            }
+        };
+
+        function setThemeColor(colorName) {
+            const theme = themes[colorName] || themes.blue;
+            const root = document.documentElement;
+            
+            Object.entries(theme).forEach(([key, value]) => {
+                root.style.setProperty(`--primary-${key}`, value);
+            });
+            
+            localStorage.themeColor = colorName;
+        }
+
+        // Initialize Color Theme
+        if (localStorage.themeColor) {
+            setThemeColor(localStorage.themeColor);
         }
 
         function filterType(type) {
